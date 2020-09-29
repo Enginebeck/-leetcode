@@ -1,5 +1,10 @@
 package medium
 
+import (
+	"fmt"
+	"math"
+)
+
 /**
  * Definition for singly-linked list.
 **/
@@ -9,43 +14,48 @@ type ListNode struct {
 }
 
 func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
-	l1rev := reverse(l1)
-	l2rev := reverse(l2)
-	result := &ListNode{0, nil}
-	for {
-		if result.Val != 0 {
-			result.Next = &ListNode{
-				Val:  0,
-				Next: nil,
-			}
-			result = result.Next
-		}
-		if l1rev != nil {
-			result.Val += l1rev.Val
-			l1rev = l1rev.Next
-		}
-		if l2rev != nil {
-			result.Val += l2rev.Val
-			l2rev = l2rev.Next
-		}
-		if l2rev == nil && l1rev == nil {
-			break
-		}
+	// todo 1. convert to array
+	//      2. convert to integer
+	//      3. sum
+	//      4. split and reverse
+	l1RevArr := listNode2Array(l1)
+	l2RevArr := listNode2Array(l2)
+	maxLen := len(l1RevArr)
+	if len(l2RevArr) > maxLen {
+		maxLen = len(l2RevArr)
 	}
-	return reverse(result)
+	l1number := getNumber(l1RevArr, maxLen)
+	l2number := getNumber(l2RevArr, maxLen)
+	sumResult := l1number + l2number
+	fmt.Println(sumResult)
+
+	return getResult(sumResult, maxLen)
 }
 
-func reverse(node *ListNode) *ListNode {
-	var listNode *ListNode
-	for {
-		temp := listNode
-		listNode = node
-		listNode.Next = temp
-		if node.Next == nil {
-			break
-		} else {
-			node = node.Next
-		}
+func getResult(sumResult int, maxLen int) *ListNode {
+	var result *ListNode
+	for index := 0; index < maxLen; {
+		result = &ListNode{sumResult / int(math.Pow10(maxLen-1-index)), result}
+		sumResult = sumResult % int(math.Pow10(maxLen-1-index))
+		index++
 	}
-	return listNode
+	return result
+}
+
+func getNumber(arr []int, maxLen int) int {
+	result := 0
+	for index := 0; index < maxLen; {
+		result += arr[index] * int(math.Pow10(maxLen-index-1))
+		index++
+	}
+	return result
+}
+
+func listNode2Array(node *ListNode) []int {
+	var result []int
+	for node != nil {
+		result = append(result, node.Val)
+		node = node.Next
+	}
+	return result
 }

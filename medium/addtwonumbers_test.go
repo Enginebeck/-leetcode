@@ -1,6 +1,7 @@
 package medium
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -27,24 +28,9 @@ func TestAddTwoNumbers(t *testing.T) {
 			},
 		},
 	}
-	expect := &ListNode{
-		Val: 7,
-		Next: &ListNode{
-			Val: 0,
-			Next: &ListNode{
-				Val:  8,
-				Next: nil,
-			},
-		},
-	}
+	expect := []int{7, 0, 8}
 	result := addTwoNumbers(param1, param2)
-	for {
-		assert.Equal(t, expect.Val, result.Val)
-		if result.Next == nil {
-			break
-		} else {
-			expect = expect.Next
-			result = result.Next
-		}
-	}
+	resultArray := listNode2Array(result)
+	fmt.Println(resultArray)
+	assert.Equal(t, expect, resultArray)
 }
