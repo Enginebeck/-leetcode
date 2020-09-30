@@ -1,4 +1,4 @@
-package simple
+package hard
 
 func maximumGap(nums []int) int {
 	//todo
