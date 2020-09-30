@@ -11,18 +11,19 @@ func reverse(x int) int {
 		return 0
 	}
 
-	absX := int(math.Abs(float64(x)))
+	absX := int64(math.Abs(float64(x)))
+	absXRoot := absX
 
 	var result int64
 	for index := 0; absX >= 1; index++ {
-		if result*10+int64(absX%10) > max || result*10+int64(absX%10)*-1 < min {
+		if result*10+absX%10 > max || result*10+absX%10*-1 < min {
 			return 0
 		} else {
-			result = result*10 + int64(absX%10)
+			result = result*10 + absX%10
 			absX = absX / 10
 		}
 	}
-	result = result * int64(x) / int64(math.Abs(float64(x)))
+	result = result * int64(x) / absXRoot
 
 	return int(result)
 }

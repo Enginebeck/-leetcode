@@ -11,14 +11,14 @@ func TestReverse(t *testing.T) {
 		Input  int
 		Expect int
 	}{
-		//{
-		//	Input:  123,
-		//	Expect: 321,
-		//},
-		//{
-		//	Input:  -1,
-		//	Expect: -1,
-		//},
+		{
+			Input:  123,
+			Expect: 321,
+		},
+		{
+			Input:  -1,
+			Expect: -1,
+		},
 		{
 			Input:  1534236469,
 			Expect: 0,
