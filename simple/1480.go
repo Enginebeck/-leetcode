@@ -1,13 +1,13 @@
 package simple
 
+import "fmt"
+
 func runningSum(nums []int) []int {
-	var result []int
-	for index, item := range nums {
-		prev := 0
+	for index, _ := range nums {
 		if index > 0 {
-			prev = result[index-1]
+			nums[index] += nums[index-1]
 		}
-		result = append(result, item+prev)
 	}
-	return result
+	fmt.Println(nums)
+	return nums
 }
