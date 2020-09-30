@@ -9,7 +9,8 @@ package simple
  */
 
 func firstBadVersion(n int) int {
-
+	//todo 二分法
+	return 0
 }
 
 func isBadVersion(version int) bool {

@@ -15,7 +15,7 @@ func TestFirstBadVersion(t *testing.T) {
 		{1, 1},
 	}
 	for _, caseItem := range cases {
-		result := mySqrt(caseItem.Input)
+		result := firstBadVersion(caseItem.Input)
 		assert.Equal(t, caseItem.Expect, result)
 	}
 }
