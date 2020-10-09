@@ -1,9 +1,8 @@
 package simple
 
 import (
+	"fmt"
 	"testing"
-
-	"github.com/stretchr/testify/assert"
 )
 
 func TestFirstBadVersion(t *testing.T) {
@@ -11,11 +10,10 @@ func TestFirstBadVersion(t *testing.T) {
 		Input  int
 		Expect int
 	}{
-		{4, 2},
-		{1, 1},
+		{5, 1702766719},
 	}
 	for _, caseItem := range cases {
 		result := firstBadVersion(caseItem.Input)
-		assert.Equal(t, caseItem.Expect, result)
+		fmt.Println(result, caseItem.Expect)
 	}
 }

@@ -9,10 +9,29 @@ package simple
  */
 
 func firstBadVersion(n int) int {
-	//todo 二分法
-	return 0
+	left := 1
+	right := n
+	for {
+		rightIsBadVersion := isBadVersion(right)
+		leftIsBadVersion := isBadVersion(left)
+		middle := (right + left) / 2
+		middleIsBadVersion := isBadVersion(middle)
+		if leftIsBadVersion {
+			return left
+		} else if left == n {
+			return 0
+		} else if middleIsBadVersion {
+			right = middle
+		} else if rightIsBadVersion {
+			if right == left+1 {
+				return right
+			} else {
+				left = middle
+			}
+		}
+	}
 }
 
 func isBadVersion(version int) bool {
-	return false
+	return version >= 4
 }
