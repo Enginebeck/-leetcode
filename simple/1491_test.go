@@ -9,10 +9,13 @@ import (
 func TestAverage(t *testing.T) {
 	cases := []struct {
 		Input  []int
-		Output []float64
+		Output float64
 	}{{
-		[]int{1, 2, 3, 4},
-		[]float64{1, 3, 6, 10},
+		[]int{4000, 3000, 1000, 2000},
+		2500.00000,
+	}, {
+		[]int{1000, 2000, 3000},
+		2000.00000,
 	}}
 	for _, caseItem := range cases {
 		result := average(caseItem.Input)
