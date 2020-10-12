@@ -1,11 +1,5 @@
 package medium
 
-import (
-	"fmt"
-	"math"
-	"strconv"
-)
-
 /**
  * Definition for singly-linked list.
 **/
@@ -15,45 +9,45 @@ type ListNode struct {
 }
 
 func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
-	// todo 1. convert to array
-	//      2. convert to integer
-	//      3. sum
-	//      4. split and reverse
 	l1Arr := listNode2Array(l1)
 	l2Arr := listNode2Array(l2)
+	maxLen := getMaxLen(l1Arr, l2Arr)
+	var newArr []int
+	for index := 0; index < maxLen; index++ {
+		l1Item := getArrItem(l1Arr, index)
+		l2Item := getArrItem(l2Arr, index)
+		newArr = append(newArr, l1Item+l2Item)
+	}
+
+	for index, item := range newArr {
+		if item > 9 {
+			if len(newArr) == index+1 {
+				newArr[index] = item % 10
+				newArr = append(newArr, 1)
+			} else {
+				newArr[index] = item % 10
+				newArr[index+1] += 1
+			}
+		}
+	}
+
+	return intArray2ListNode(newArr)
+}
+
+func getArrItem(arr []int, index int) int {
+	if len(arr) < index+1 {
+		return 0
+	} else {
+		return arr[index]
+	}
+}
+
+func getMaxLen(l1Arr, l2Arr []int) int {
 	maxLen := len(l1Arr)
 	if len(l2Arr) > maxLen {
 		maxLen = len(l2Arr)
 	}
-	l1number := getNumber(l1Arr, maxLen)
-	l2number := getNumber(l2Arr, maxLen)
-	sumResult := l1number + l2number
-	fmt.Println(l1Arr, l2Arr)
-	fmt.Println(l1number, l2number)
-	return getResult(sumResult)
-}
-
-func getResult(sumResult int) *ListNode {
-	var result *ListNode
-	maxLen := len(strconv.Itoa(sumResult))
-	for index := 0; index < maxLen; {
-		result = &ListNode{sumResult / int(math.Pow10(maxLen-1-index)), result}
-		sumResult = sumResult % int(math.Pow10(maxLen-1-index))
-		index++
-	}
-	return result
-}
-
-func getNumber(arr []int, maxLen int) int {
-	result := 0
-	for index := maxLen - 1; index >= 0; {
-		if index >= len(arr) {
-			index = len(arr) - 1
-		}
-		result += arr[index] * int(math.Pow10(index))
-		index--
-	}
-	return result
+	return maxLen
 }
 
 func listNode2Array(node *ListNode) []int {
