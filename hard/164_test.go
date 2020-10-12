@@ -11,9 +11,8 @@ func TestMaximumGap(t *testing.T) {
 		Input  []int
 		Expect int
 	}{
-		{[]int{4}, 0},
-		{[]int{1, 8}, 7},
-		{[]int{1, 4, 8}, 4},
+		{[]int{3, 6, 9, 1}, 3},
+		{[]int{10}, 0},
 	}
 	for _, caseItem := range cases {
 		result := maximumGap(caseItem.Input)
